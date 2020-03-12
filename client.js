@@ -9,18 +9,26 @@ const connect = () => {
   //encode the connection to become readable
   conn.setEncoding('utf8');
 
-  conn.on('connect', () => {
-    console.log('Successfully connected to game server')
-    conn.write('Name: N.S');
+  conn.on('connect', () => { //when server detects that we have connected...
+    console.log('Successfully connected to game server'); //log a confirmation message
+    conn.write('Name: N.S'); //tell the server our name
+  });
+
+  conn.on('error', (data) => { 
+    console.log('connection ended', data);
+    process.exit();
+
   });
 
 
-  //event handler to handle incoming data. In this case we just console log it
-  conn.on('data', (data) =>{
-    console.log(data);
+  conn.on('data', (data) =>{ //when server recieves any data...
+    console.log(data); //log that data
   });
-
-  return conn;
+  conn.on('end', ()=>{
+    console.log('ended');
+    process.exit();
+  })
+  return conn; //return connection object
 
 };
 
