@@ -13,6 +13,7 @@ const setupInput = (conn) => {
 const handleUserInput = (key) => {  //function to handle user inputs
 
   if (key === '\u0003') { 
+    console.log("Let's get outta here!")
     process.exit(); //exit if user hits ctrl+C
   }
   if (key === 'w') {
