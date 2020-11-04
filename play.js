@@ -1,7 +1,19 @@
-const connect = require('./client'); //import connection module
-const setupInput = require('./input'); //import input module
-const connectObj = connect();
-console.log('Connecting...');
-setupInput(connectObj);
+const net = require('net');
+
+const connect = () => {
+  const conn = net.createConnection({
+    host: 'localhost',
+    port: '50541'
+  });
+
+  conn.setEncoding('utf8');
+  conn.on('data', (data) => {
+    console.log(data);
+  })
+  return conn;
+}
+
+console.log("connecting..");
+connect();
 
 
